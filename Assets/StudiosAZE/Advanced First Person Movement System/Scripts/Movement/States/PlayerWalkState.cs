@@ -15,7 +15,7 @@ namespace AZE.AdvancedFirstPerson
         {
             CheckSwitchStates();
             ctx.HandleGravity();
-            ctx.HandleMovement(ctx.WalkSpeed);
+            ctx.HandleMovement(ctx.Data.WalkSpeed);
         }
 
         public override void ExitState() 

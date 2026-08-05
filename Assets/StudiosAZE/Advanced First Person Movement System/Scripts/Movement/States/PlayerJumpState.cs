@@ -6,20 +6,20 @@ namespace AZE.AdvancedFirstPerson
 
         public override void EnterState()
         {
-            if (!ctx.useJump) return;
+            if (!ctx.Data.UseJump) return;
 
             ctx.JumpBufferCounter = 0f;
             ctx.CoyoteTimeCounter = 0f;
 
             ctx.TargetHeight = ctx.GetStandingHeight();
-            ctx.VerticalVelocity = ctx.JumpForce;
+            ctx.VerticalVelocity = ctx.Data.JumpForce;
         }
 
         public override void UpdateState()
         {
             CheckSwitchStates();
             ctx.HandleGravity();
-            ctx.HandleMovement(ctx.WalkSpeed);
+            ctx.HandleMovement(ctx.Data.WalkSpeed);
         }
 
         public override void CheckSwitchStates()

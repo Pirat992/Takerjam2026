@@ -13,7 +13,7 @@ namespace AZE.AdvancedFirstPerson
         {
             CheckSwitchStates();
             ctx.HandleGravity();
-            ctx.HandleMovement(ctx.RunSpeed);
+            ctx.HandleMovement(ctx.Data.RunSpeed);
         }
 
         public override void ExitState() 

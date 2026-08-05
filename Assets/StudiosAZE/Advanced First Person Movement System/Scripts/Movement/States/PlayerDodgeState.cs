@@ -11,7 +11,7 @@ namespace AZE.AdvancedFirstPerson
 
         public override void EnterState()
         {
-            if (!ctx.useDodge) return;
+            if (!ctx.Data.UseDodge) return;
 
             _timer = 0f;
             ctx.LastDodgeTime = Time.time;
@@ -39,9 +39,9 @@ namespace AZE.AdvancedFirstPerson
         {
             ctx.HandleGravity();
 
-            if (_timer < ctx.DodgeDuration)
+            if (_timer < ctx.Data.DodgeDuration)
             {
-                float currentDodgeSpeed = Mathf.Lerp(ctx.DodgeSpeed, 0f, _timer / ctx.DodgeDuration);
+                float currentDodgeSpeed = Mathf.Lerp(ctx.Data.DodgeSpeed, 0f, _timer / ctx.Data.DodgeDuration);
                 ctx.CurrentMoveVelocity = _dodgeDirection * currentDodgeSpeed;
                 _timer += Time.deltaTime;
             }

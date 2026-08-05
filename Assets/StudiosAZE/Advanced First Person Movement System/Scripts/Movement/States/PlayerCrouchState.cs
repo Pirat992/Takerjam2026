@@ -8,7 +8,7 @@ namespace AZE.AdvancedFirstPerson
 
         public override void EnterState()
         {
-            if (!ctx.useCrouch) return;
+            if (!ctx.Data.UseCrouch) return;
             ctx.TargetHeight = ctx.GetCrouchHeight();
         }
 
@@ -17,7 +17,7 @@ namespace AZE.AdvancedFirstPerson
             CheckSwitchStates();
             ctx.HandleGravity();
 
-            ctx.HandleMovement(ctx.CrouchSpeed);
+            ctx.HandleMovement(ctx.Data.CrouchSpeed);
         }
 
         public override void ExitState() { }
