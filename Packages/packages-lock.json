@@ -74,7 +74,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.36",
+      "version": "3.0.40",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -255,13 +255,6 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
-    },
-    "com.walcht.ide.neovim": {
-      "version": "https://github.com/walcht/com.walcht.ide.neovim.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "54fb26c29f5fc35cab1cb5f7be49e326813b251e"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

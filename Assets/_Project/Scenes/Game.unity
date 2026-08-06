@@ -289,7 +289,6 @@ GameObject:
   - component: {fileID: 306719556}
   - component: {fileID: 306719555}
   - component: {fileID: 306719554}
-  - component: {fileID: 306719557}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -372,26 +371,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &306719557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 306719553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfb5e0943c008a8739f832680ebaffd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 0}
-  dialogueText: {fileID: 0}
-  choicesContainer: {fileID: 0}
-  choiceButtonTemplate: {fileID: 0}
-  clickAction: {fileID: 0}
-  advanceAction: {fileID: 0}
-  inputHandler: {fileID: 0}
-  interactionPrompt: {fileID: 0}
 --- !u!114 &335545802
 MonoBehaviour:
   m_ObjectHideFlags: 0
