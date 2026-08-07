@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2907522906095618848}
   - component: {fileID: 9010275383538016288}
   m_Layer: 3
-  m_Name: PortalInput
+  m_Name: SpatialHoleInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1bf777368b255c40ace29a0d1c3f210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portal: {fileID: 0}
+  spatialHole: {fileID: 0}
   camera: {fileID: 8019107772216354966}
   meshRenderer: {fileID: 3057859311273941883}
   shader: {fileID: 4800000, guid: d6c9d38e0ad06a94d943cc741a5d3c71, type: 3}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 8019107772216354966}
   - component: {fileID: 3436990773381096773}
   m_Layer: 0
-  m_Name: CameraPortal
+  m_Name: CameraSpatialHole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

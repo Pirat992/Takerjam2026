@@ -5,24 +5,21 @@ namespace AZE.AdvancedFirstPerson
     public class CharacterPushInteraction : MonoBehaviour
     {
         [Header("Configurações de Força")]
-        public float pushPower = 2.0f;
-        public float weightBasedPush = 1.0f;
+        [SerializeField] private float pushPower = 2.0f;
+        [SerializeField] private float weightBasedPush = 1.0f;
+        [SerializeField] private float heightIgnoreObject = -.3f;
 
         void OnControllerColliderHit(ControllerColliderHit hit)
         {
-            Rigidbody body = hit.collider.attachedRigidbody;
+            Rigidbody body;
 
-            if (body == null || body.isKinematic)
+            if ((body = hit.rigidbody) == null || body.isKinematic ||
+                body.mass < weightBasedPush || hit.moveDirection.y < heightIgnoreObject)
             {
                 return;
             }
 
-            if (hit.moveDirection.y < -0.3f)
-            {
-                return;
-            }
-
-            Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+            var pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
 
             body.velocity = pushDir * pushPower;
         }

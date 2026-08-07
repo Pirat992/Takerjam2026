@@ -1,22 +1,24 @@
 using System.Collections;
+using Game.Abstraction;
 using UnityEngine;
 
-namespace Game
+namespace Game.SpatialHole
 {
-    public class PortalRoom : MonoBehaviour
+    public class SpatialHoleRoom : MonoView
     {
-        [SerializeField] private Portal portal;
+        [SerializeField] private SpatialHole spatialHole;
         [SerializeField] private float timeLife;
         [SerializeField] private float rotationDuration = 10f;
 
-        private Portal output;
+        private SpatialHole output;
         
-        public void SetPortal(Portal portal)
+        public void SetHole(SpatialHole spatialHole)
         {
-            output =  portal;
-            this.portal.Show();
-            this.portal.SetPortal(output);
-            output.SetPortal(this.portal);
+            output =  spatialHole;
+            this.spatialHole.Show();
+            this.spatialHole.SetPortal(output);
+            output.SetPortal(this.spatialHole);
+            Show();
             StartCoroutine(Delay());
         }
 
@@ -24,8 +26,8 @@ namespace Game
         {
             yield return RotateRoutine();
             yield return new WaitForSeconds(timeLife);
-            Destroy(output.gameObject);
-            Destroy(gameObject);
+            // Destroy(output.gameObject);
+            // Destroy(portal.gameObject);
         }
         
         private IEnumerator RotateRoutine()

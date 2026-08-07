@@ -1,11 +1,11 @@
 using Game.Abstraction;
 using UnityEngine;
 
-namespace Game
+namespace Game.SpatialHole
 {
-    public class Portal : MonoView
+    public class SpatialHole : MonoView
     {
-        [SerializeField] private Portal portal;
+        [SerializeField] private SpatialHole spatialHole;
         [SerializeField] private Camera camera;
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private Shader shader;
@@ -17,20 +17,21 @@ namespace Game
 
         private void Start()
         {
-            SetPortal(portal);
+            SetPortal(spatialHole);
         }
 
-        public void SetPortal(Portal portal)
+        public void SetPortal(SpatialHole spatialHole)
         {
-            this.portal = portal;
-            this.portal.Camera.targetTexture = new(size, size, depth);
+            this.spatialHole = spatialHole;
+            this.spatialHole.Camera.targetTexture = new(size, size, depth);
             meshRenderer.materials = new Material[]{(new (shader))};
-            meshRenderer.sharedMaterial.mainTexture = portal.Camera.targetTexture;
+            meshRenderer.sharedMaterial.mainTexture = spatialHole.Camera.targetTexture;
+            Show();
         }
 
         private void Update()
         {
-            Quaternion difference = transform.rotation * Quaternion.Inverse(portal.transform.rotation * Quaternion.Euler(0,180,0));
+            Quaternion difference = transform.rotation * Quaternion.Inverse(spatialHole.transform.rotation * Quaternion.Euler(0,180,0));
             camera.transform.rotation = difference * Camera.main.transform.rotation;
         }
 
@@ -40,9 +41,9 @@ namespace Game
             
             var magnitude = rb.velocity.magnitude;
             rb.velocity = Vector3.zero;
-            rb.transform.position = portal.transform.position;
+            rb.transform.position = spatialHole.transform.position;
             rb.transform.localScale = Vector3.one * 5f;
-            rb.AddForce(portal.transform.forward * magnitude, ForceMode.Impulse);
+            rb.AddForce(spatialHole.transform.forward * magnitude, ForceMode.Impulse);
         }
     }
 }
