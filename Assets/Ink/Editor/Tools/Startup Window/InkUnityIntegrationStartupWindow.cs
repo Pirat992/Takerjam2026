@@ -23,6 +23,7 @@ namespace Ink.UnityIntegration {
 		}
 
 		static void TryCreateWindow () {
+			return;
 			if (InkSettings.instance.suppressStartupWindow) return;
 			announcementVersionPreviouslySeen = EditorPrefs.GetInt(editorPrefsKeyForVersionSeen, -1);
 			if (announcementVersion != announcementVersionPreviouslySeen) {
