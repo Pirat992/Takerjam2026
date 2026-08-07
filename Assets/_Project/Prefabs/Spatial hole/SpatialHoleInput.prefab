@@ -53,6 +53,9 @@ MonoBehaviour:
   camera: {fileID: 8019107772216354966}
   meshRenderer: {fileID: 3057859311273941883}
   shader: {fileID: 4800000, guid: d6c9d38e0ad06a94d943cc741a5d3c71, type: 3}
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
   size: 2048
   depth: 24
   isTeleport: 1

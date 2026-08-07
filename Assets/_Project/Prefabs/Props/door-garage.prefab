@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7152478441736704056}
   - component: {fileID: 5587937026637812410}
   - component: {fileID: 3261626926078773990}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door-garage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 4641785429628025118}
   - component: {fileID: 696226464332699563}
   - component: {fileID: 459646345701508863}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}

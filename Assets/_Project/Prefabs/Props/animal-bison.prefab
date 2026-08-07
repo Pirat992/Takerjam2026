@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4658417349525830632}
   - component: {fileID: 923053376200567222}
   - component: {fileID: 4614309928628248313}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg-front-left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4012163834156766901}
   - component: {fileID: 4514503496890510708}
   - component: {fileID: 3987427549984135262}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg-back-left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 3223849351032185019}
   - component: {fileID: 2175297512398307169}
   - component: {fileID: 3577840575121794361}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 5396205883003798250}
   - component: {fileID: 4032193327476842084}
   - component: {fileID: 1403132564016368176}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 7177478768655887291}
   - component: {fileID: 3097002692490330913}
   - component: {fileID: 8078298817340069175}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: animal-bison
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 3443246747591490431}
   - component: {fileID: 5191118952410214252}
   - component: {fileID: 1565558242010772899}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg-front-right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 4690614765154845206}
   - component: {fileID: 3987489038636577780}
   - component: {fileID: 7654567852841935374}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg-back-right
   m_TagString: Untagged
   m_Icon: {fileID: 0}

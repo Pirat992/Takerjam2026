@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7824704737117128277}
   - component: {fileID: 3465395691045253755}
   - component: {fileID: 5657688537006393593}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: crate-color
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 9126968404421718606}
   - component: {fileID: 5612934486935647487}
   - component: {fileID: 331016266212283064}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: crate-color
   m_TagString: Untagged
   m_Icon: {fileID: 0}

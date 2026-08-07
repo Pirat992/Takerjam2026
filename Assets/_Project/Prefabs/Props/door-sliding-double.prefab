@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6141911793467380500}
   - component: {fileID: 2070893332496078380}
   - component: {fileID: 6714297498525403990}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door-right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 404570672368822470}
   - component: {fileID: 6629143070371456037}
   - component: {fileID: 9079052555944027207}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door-left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 2925924646093834608}
   - component: {fileID: 273040890178450214}
   - component: {fileID: 3115810341621833269}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door-sliding-double
   m_TagString: Untagged
   m_Icon: {fileID: 0}

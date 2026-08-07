@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1259935135741639543}
   - component: {fileID: 3323324475278680045}
   - component: {fileID: 7204908614517727283}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: column-rounded-low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3936029213699918809}
   - component: {fileID: 6414192671173869548}
   - component: {fileID: 6478774846705037004}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: column-rounded-low
   m_TagString: Untagged
   m_Icon: {fileID: 0}

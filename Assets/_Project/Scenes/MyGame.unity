@@ -280,7 +280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2426025317709729860, guid: 3312c9fa99d14c341b614ef15463b591, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 2426025317709729860, guid: 3312c9fa99d14c341b614ef15463b591, type: 3}
       propertyPath: m_LocalPosition.z
@@ -323,6 +323,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5462912738444520553, guid: 3312c9fa99d14c341b614ef15463b591, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462912738444520553, guid: 3312c9fa99d14c341b614ef15463b591, type: 3}
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
@@ -338,6 +342,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 80d787e8a5f7c7349863131496c35e9e, type: 2}
+    - target: {fileID: 7611095277644130120, guid: 3312c9fa99d14c341b614ef15463b591, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 183
+      objectReference: {fileID: 0}
     - target: {fileID: 9055120975177967751, guid: 3312c9fa99d14c341b614ef15463b591, type: 3}
       propertyPath: portal
       value: 
@@ -348,9 +356,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9055120975177967751, guid: 3312c9fa99d14c341b614ef15463b591, type: 3}
       propertyPath: rotationDuration
-      value: 30
+      value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5462912738444520553, guid: 3312c9fa99d14c341b614ef15463b591, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1048,7 +1057,8 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9010275383538016288, guid: 34ee5faedf37a224daf5c838c245bd97, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

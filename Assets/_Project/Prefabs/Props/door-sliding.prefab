@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1009026632315887040}
   - component: {fileID: 5052165271768667884}
   - component: {fileID: 535040592501947440}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5468805400331772854}
   - component: {fileID: 2893048963132811363}
   - component: {fileID: 5434949242004134615}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door-sliding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
