@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using DG.Tweening;
 
 public class Portal : MonoBehaviour
 {
@@ -13,9 +14,16 @@ public class Portal : MonoBehaviour
     [Header("Advanced Settings")]
     public int recursionLimit = 5;
 
+    [Header("Animation Settings")] 
+    [SerializeField] private float openDuration = 0.5f;
+    [SerializeField] private Vector3 targetScale = new Vector3(2f, 4f, 2f);
+    [SerializeField] private Ease easeType = Ease.OutBack;
+
     private Camera mainCamera;
     private RenderTexture viewTexture;
     private List<PortalTraveler> trackedTravelers = new List<PortalTraveler>();
+
+
 
     void Awake()
     {
@@ -24,6 +32,26 @@ public class Portal : MonoBehaviour
         {
             portalCamera.enabled = false; // Отключаем стандартный авто-рендер камеры
         }
+    }
+
+    public void OpenPortal()
+    {
+        transform.localScale = Vector3.zero; // Сбрасываем размер
+        transform.DOScale(targetScale, openDuration)
+                 .SetEase(easeType)
+                 .SetLink(gameObject);
+    }
+
+    public void ClosePortal()
+    {
+        transform.DOScale(Vector3.zero, openDuration)
+                 .SetEase(easeType)
+                 .SetLink(gameObject);
+    }
+
+    private void OnEnable()
+    {
+        OpenPortal();
     }
 
     // --- 1. ВЫЗЫВАЕТСЯ ИЗ MainCamera.cs ПЕРЕД РЕНДЕРОМ ---
@@ -141,9 +169,13 @@ public class Portal : MonoBehaviour
             traveler.ExitPortalThreshold();
             trackedTravelers.Remove(traveler);
         }
+        ClosePortal();
     }
 
-    
+    public void OutputPortal(Portal portal)
+    {
+        linkedPortal = portal;
+    }
 
     private void HandleTravelers()
     {
@@ -176,6 +208,7 @@ public class Portal : MonoBehaviour
                 traveler.Teleport(transform, linkedPortal.transform, newPos, newRot);
 
             trackedTravelers.Clear();
+            
         }
     }
 }
