@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2453119842593017071}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.2, y: 1.39, z: 23.68}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -63,7 +63,7 @@ MonoBehaviour:
   minGrowCoef: 4.5
   maxGrowCoef: 6.5
   newLegCooldown: 0.3
-  velocity: {x: 0.3863912, y: 0, z: 0.9119151}
+  velocity: {x: 0.3227546, y: 0, z: -0.44979787}
 --- !u!114 &4731455468473440640
 MonoBehaviour:
   m_ObjectHideFlags: 0
