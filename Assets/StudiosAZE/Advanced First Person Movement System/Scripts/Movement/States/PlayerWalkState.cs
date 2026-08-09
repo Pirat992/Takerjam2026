@@ -8,7 +8,8 @@ namespace AZE.AdvancedFirstPerson
 
         public override void EnterState()
         {
-            ctx.TargetHeight = ctx.GetStandingHeight();
+            ctx.TargetHeight = ctx.GetStandingHeight(); 
+            ctx.Animator.SetTrigger("Idle");
         }
 
         public override void UpdateState()

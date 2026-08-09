@@ -10,6 +10,7 @@ namespace AZE.AdvancedFirstPerson
         {
             ctx.TargetHeight = ctx.GetStandingHeight();
             ctx.CurrentMoveVelocity = Vector3.zero;
+            ctx.Animator.SetTrigger("Idle");
         }
 
         public override void UpdateState()

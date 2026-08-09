@@ -6,7 +6,8 @@ namespace AZE.AdvancedFirstPerson
 
         public override void EnterState()
         {
-            ctx.TargetHeight = ctx.GetStandingHeight();
+            ctx.TargetHeight = ctx.GetStandingHeight(); 
+            ctx.Animator.SetTrigger("Run");
         }
 
         public override void UpdateState()

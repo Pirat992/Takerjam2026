@@ -8,6 +8,7 @@ namespace AZE.AdvancedFirstPerson
     public class PlayerMovementStateMachine : MonoBehaviour
     {
         [field: SerializeField] public PlayerMovementData Data { get; private set; }
+        [field: SerializeField] public Animator Animator { get; private set; }
 
         [Header("References")]
         public Transform CameraTransform;
