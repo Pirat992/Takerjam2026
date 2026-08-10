@@ -1,103 +1,105 @@
 using System.Collections;
 using UnityEngine;
-using Pathfinding; // Обязательно для твоего AIPath
+using Pathfinding;
 
-public class MimicBrain : MonoBehaviour
+namespace Game.NPC
 {
-    [Header("Настройки")]
-    public string npcTag = "NPC";
-    public string playerTag = "Player";
-    public float eatDistance = 2f;
-    public float eatPause = 3f;
-
-    private AIPath aiPath;
-    private MimicSpace.Mimic mimicLegs;
-    private Transform playerTransform;
-    private bool isEating = false;
-
-    void Start()
+    public class MimicBrain : MonoBehaviour
     {
-        // Хватаем твои компоненты со скрина
-        aiPath = GetComponent<AIPath>();
-        mimicLegs = GetComponent<MimicSpace.Mimic>();
+        [SerializeField] private Player _player;
+        [SerializeField] private LayerMask mask;
+        [SerializeField] private LayerMask playerMask;
+        [SerializeField] private bool StoryMode = false;
+        [SerializeField] private NPCReferences references;
+        [Header("Params")]
+        [SerializeField] private float eatDistance = 2f;
+        [SerializeField] private float radiusDetect = 3f;
+        [SerializeField] private float eatPause = 3f;
 
-        GameObject p = GameObject.FindGameObjectWithTag(playerTag);
-        if (p) playerTransform = p.transform;
+        [SerializeField] private AIDestinationSetter destinationSetter;
+        [SerializeField] private AIPath aiPath;
+        [SerializeField] private MimicSpace.Mimic mimicLegs;
+        
+        private Human _target;
 
-        // Запускаем мозговой процесс
-        StartCoroutine(BrainLoop());
-    }
-
-    void Update()
-    {
-        // Передаем скорость в щупальца, чтобы они красиво перебирались
-        if (mimicLegs != null)
+        private void Start()
         {
-            mimicLegs.velocity = isEating ? Vector3.zero : aiPath.velocity;
+            StoryInit();
+
+            StartCoroutine(Loop());
         }
-    }
 
-    // Это цикл, который проверяет обстановку 5 раз в секунду
-    IEnumerator BrainLoop()
-    {
-        while (true)
+        private void StoryInit()
         {
-            if (isEating)
+            if (StoryMode && (_target = references.GetHuman()) != null)
             {
+                destinationSetter.target = _target.transform;
+                aiPath.SearchPath();
+            }
+        }
+
+        private IEnumerator Loop()
+        {
+            while (aiPath.canMove)
+            {
+                if (_target == null)
+                {
+                    var colliders = Physics.OverlapSphere(transform.position, radiusDetect, mask);
+
+                    foreach (var collider in colliders)
+                    {
+                        collider.TryGetComponent(out Human human);
+                        if (!human.IsAlive) continue;
+                        _target = human;
+                        destinationSetter.target = human.transform;
+                        aiPath.SearchPath();
+                    }
+                }
+
+                if (!StoryMode && _target == null)
+                {
+                    destinationSetter.target = _player.transform;
+                    aiPath.SearchPath();
+                }
+
+                if (destinationSetter.target != null &&
+                    Vector3.Distance(destinationSetter.target.position, transform.position) <= eatDistance)
+                {
+                    if (!StoryMode && Physics.CheckSphere(transform.position, radiusDetect, mask))
+                    {
+                        _player.TryGetComponent(out CharacterController controller);
+                        controller.enabled = false;
+                        _player?.SetDamage(1000f);
+                    }
+                    else if (_target != null)
+                    {
+                        _target.SetMove(false);
+                        yield return new WaitForSeconds(eatPause);
+                        if (_target == null) continue;
+                        var posH = _target.transform.position;
+                        Destroy(_target.gameObject);
+                        _target = null;
+                        var clone = Instantiate(this);
+                        var pos = clone.transform.position;
+                        pos.y = transform.position.y;
+                        pos.x = posH.x;
+                        pos.z = posH.z;
+                        yield return new WaitForSeconds(eatPause);
+                        StoryInit();
+                    }
+                }
+                
+                mimicLegs.velocity = aiPath.velocity;
                 yield return null;
-                continue;
             }
-
-            // Ищем NPC. Если нет - берем игрока
-            Transform target = FindNearestNPC();
-            if (target == null) target = playerTransform;
-
-            if (target != null)
-            {
-                // Говорим AIPath, куда бежать
-                aiPath.destination = target.position;
-
-                // Проверяем, можно ли сожрать
-                if (target.CompareTag(npcTag) && Vector3.Distance(transform.position, target.position) <= eatDistance)
-                {
-                    yield return StartCoroutine(EatRoutine(target.gameObject));
-                }
-            }
-            yield return new WaitForSeconds(0.2f);
         }
-    }
 
-    IEnumerator EatRoutine(GameObject npc)
-    {
-        isEating = true;
-        aiPath.canMove = false; // Бьем по тормозам
-
-        Destroy(npc); // Ам-ням
-
-        yield return new WaitForSeconds(eatPause); // Жуем 3 секунды
-
-        aiPath.canMove = true; // Отпускаем тормоза
-        isEating = false;
-    }
-
-    Transform FindNearestNPC()
-    {
-        GameObject[] npcs = GameObject.FindGameObjectsWithTag(npcTag);
-        Transform nearest = null;
-        float minDist = Mathf.Infinity;
-
-        foreach (var npc in npcs)
+        private void OnDrawGizmos()
         {
-            if (npc != null && npc.activeInHierarchy)
-            {
-                float dist = Vector3.Distance(transform.position, npc.transform.position);
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    nearest = npc.transform;
-                }
-            }
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, eatDistance);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, radiusDetect);
         }
-        return nearest;
     }
 }
