@@ -65,11 +65,11 @@ namespace Game.NPC
                 if (destinationSetter.target != null &&
                     Vector3.Distance(destinationSetter.target.position, transform.position) <= eatDistance)
                 {
-                    if (!StoryMode && Physics.CheckSphere(transform.position, radiusDetect, mask))
+                    if (!StoryMode && Physics.CheckSphere(transform.position, radiusDetect, playerMask))
                     {
                         _player.TryGetComponent(out CharacterController controller);
                         controller.enabled = false;
-                        _player?.SetDamage(1000f);
+                        _player?.SetDamage(-1000f);
                     }
                     else if (_target != null)
                     {

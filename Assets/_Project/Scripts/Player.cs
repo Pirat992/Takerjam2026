@@ -6,8 +6,7 @@ namespace Game
 {
     public class Player : MonoBehaviour
     {
-        public event Action OnPlayerDeathEv;
-        
+        [SerializeField] private WindowFinish lose;
         [SerializeField] private PlayerMovementStateMachine movement;
         [SerializeField] private CharacterController controller;
         
@@ -23,7 +22,7 @@ namespace Game
             {
                 controller.enabled = false;
                 movement.Animator.SetTrigger("Death");
-                OnPlayerDeathEv?.Invoke();
+                lose.Show();
             }
         }
     }

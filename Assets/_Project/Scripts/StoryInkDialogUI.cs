@@ -83,6 +83,7 @@ namespace Game
             panel.SetActive(true);
             ShowInteractionPrompt(false);
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         private void Hide()
