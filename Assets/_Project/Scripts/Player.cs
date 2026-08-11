@@ -1,6 +1,5 @@
 using AZE.AdvancedFirstPerson;
 using UnityEngine;
-using System;
 
 namespace Game
 {
@@ -10,6 +9,7 @@ namespace Game
         [SerializeField] private PlayerMovementStateMachine movement;
         [SerializeField] private CharacterController controller;
         
+        [field: SerializeField] public PortalGun Gun { get; private set; }
         [field: SerializeField] public  float Health { get; private set; } = 100f;
 
         public void SetDamage(float damage)

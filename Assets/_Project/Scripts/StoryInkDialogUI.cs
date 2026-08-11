@@ -15,11 +15,12 @@ namespace Game
         [SerializeField] private GameObject interactionPrompt;
         [SerializeField] private InkFile inkFile;
         [SerializeField] private string startKnot;
+        [SerializeField] private bool isGoTo = true;
 
         private Story story;
         private bool showingChoices;
 
-        private void Start()
+        private void OnEnable()
         {
             Show();
             StartStory(inkFile, startKnot);
@@ -52,6 +53,7 @@ namespace Game
             if (story.canContinue)
             {
                 dialogueText.text = story.Continue();
+                return;
             }
             else if (story.currentChoices.Count > 0)
             {
@@ -65,11 +67,12 @@ namespace Game
                         Advance();
                     });
                 }
+                return;
             }
-            else
-            {
+
+            Hide();
+            if (isGoTo)
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
         }
 
         public void ShowInteractionPrompt(bool show)
@@ -84,10 +87,14 @@ namespace Game
             ShowInteractionPrompt(false);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            if (!isGoTo) 
+                Time.timeScale = 0;
         }
 
         private void Hide()
         {
+            if (!isGoTo) 
+                Time.timeScale = 1f;
             story = null;
             showingChoices = false;
             ClearChoices();

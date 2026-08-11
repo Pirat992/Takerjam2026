@@ -1,29 +1,29 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine.Rendering.Universal;
+using System.Collections.Generic;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
+using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class Portal : MonoBehaviour
 {
-    [Header("Portal Links")]
-    public Portal linkedPortal;
+    public event Action OnCloseEv;
+    [SerializeField] private BoxCollider collider;
+    [Header("Portal Links")] public Portal linkedPortal;
     public MeshRenderer screen;
     public Camera portalCamera;
 
-    [Header("Advanced Settings")]
-    public int recursionLimit = 5;
+    [Header("Advanced Settings")] public int recursionLimit = 5;
 
-    [Header("Animation Settings")] 
-    [SerializeField] private float openDuration = 0.5f;
+    [Header("Animation Settings")] [SerializeField]
+    private float openDuration = 0.5f;
+
     [SerializeField] private Vector3 targetScale = new Vector3(2f, 4f, 2f);
     [SerializeField] private Ease easeType = Ease.OutBack;
 
     private Camera mainCamera;
     private RenderTexture viewTexture;
     private List<PortalTraveler> trackedTravelers = new List<PortalTraveler>();
-
-
 
     void Awake()
     {
@@ -36,17 +36,19 @@ public class Portal : MonoBehaviour
 
     public void OpenPortal()
     {
+        collider.enabled = true;
         transform.localScale = Vector3.zero; // Сбрасываем размер
         transform.DOScale(targetScale, openDuration)
-                 .SetEase(easeType)
-                 .SetLink(gameObject);
+            .SetEase(easeType)
+            .SetLink(gameObject);
     }
 
     public void ClosePortal()
     {
+        collider.enabled = false;
         transform.DOScale(Vector3.zero, openDuration)
-                 .SetEase(easeType)
-                 .SetLink(gameObject);
+            .SetEase(easeType)
+            .SetLink(gameObject).OnComplete(() => OnCloseEv?.Invoke());
     }
 
     private void OnEnable()
@@ -85,9 +87,9 @@ public class Portal : MonoBehaviour
 
         // Позиционируем камеру портала относительно выходящего портала (с поворотом на 180°)
         Matrix4x4 m = linkedPortal.transform.localToWorldMatrix
-                     * Matrix4x4.Rotate(Quaternion.Euler(0, 180, 0))
-                     * transform.worldToLocalMatrix
-                     * mainCamera.transform.localToWorldMatrix;
+                      * Matrix4x4.Rotate(Quaternion.Euler(0, 180, 0))
+                      * transform.worldToLocalMatrix
+                      * mainCamera.transform.localToWorldMatrix;
 
         portalCamera.transform.SetPositionAndRotation(m.GetColumn(3), m.rotation);
 
@@ -131,11 +133,13 @@ public class Portal : MonoBehaviour
     private void SetObliqueNearClipPlane()
     {
         Transform clipPlane = linkedPortal.transform;
-        int dot = System.Math.Sign(Vector3.Dot(clipPlane.forward, clipPlane.position - portalCamera.transform.position));
+        int dot = System.Math.Sign(Vector3.Dot(clipPlane.forward,
+            clipPlane.position - portalCamera.transform.position));
 
         Vector3 camSpacePos = portalCamera.worldToCameraMatrix.MultiplyPoint(clipPlane.position);
         Vector3 camSpaceNormal = portalCamera.worldToCameraMatrix.MultiplyVector(clipPlane.forward) * dot;
-        Vector4 clipPlaneCameraSpace = new Vector4(camSpaceNormal.x, camSpaceNormal.y, camSpaceNormal.z, -Vector3.Dot(camSpacePos, camSpaceNormal));
+        Vector4 clipPlaneCameraSpace = new Vector4(camSpaceNormal.x, camSpaceNormal.y, camSpaceNormal.z,
+            -Vector3.Dot(camSpacePos, camSpaceNormal));
 
         portalCamera.projectionMatrix = mainCamera.CalculateObliqueMatrix(clipPlaneCameraSpace);
     }
@@ -169,6 +173,7 @@ public class Portal : MonoBehaviour
             traveler.ExitPortalThreshold();
             trackedTravelers.Remove(traveler);
         }
+
         ClosePortal();
     }
 
@@ -194,21 +199,20 @@ public class Portal : MonoBehaviour
             int prevSide = System.Math.Sign(Vector3.Dot(traveler.previousOffset, transform.forward));
 
             // Объект пересек плоскость портала
-            
-            
-                Matrix4x4 m = linkedPortal.transform.localToWorldMatrix
-                             * Matrix4x4.Rotate(Quaternion.Euler(0, 180, 0))
-                             * transform.worldToLocalMatrix
-                             * traveler.transform.localToWorldMatrix;
 
-                Vector3 newPos = m.GetColumn(3);
-                Quaternion newRot = m.rotation;
 
-                // Перемещаем объект
-                traveler.Teleport(transform, linkedPortal.transform, newPos, newRot);
+            Matrix4x4 m = linkedPortal.transform.localToWorldMatrix
+                          * Matrix4x4.Rotate(Quaternion.Euler(0, 180, 0))
+                          * transform.worldToLocalMatrix
+                          * traveler.transform.localToWorldMatrix;
+
+            Vector3 newPos = m.GetColumn(3);
+            Quaternion newRot = m.rotation;
+
+            // Перемещаем объект
+            traveler.Teleport(transform, linkedPortal.transform, newPos, newRot);
 
             trackedTravelers.Clear();
-            
         }
     }
 }
